@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileGuard DLP Enterprise | نظام حماية ومنع تسريب بيانات الشركات الداخلي</title>
+    <meta name="description" content="الحل الأمني الأول لحماية أسرار وبيانات شركتك من التسريب عبر فلاشات الـ USB والمتصفحات والواتساب، مع موافقة وإشعار لحظي عبر تليجرام. خصم 50% لفترة محدودة.">
+    <meta name="keywords" content="DLP, Data Loss Prevention, حماية بيانات الشركات, منع تسريب البيانات, حظر فلاشات USB, تأمين الواتساب, حماية الملفات, سيرفر محلي, Active Directory">
+    
+    <!-- Open Graph for Facebook & WhatsApp -->
+    <meta property="og:title" content="FileGuard DLP Enterprise | درع حماية أسرار شركتك">
+    <meta property="og:description" content="خصم 50% لفترة محدودة! راقب وامنع نسخ ملفات الشركة الحساسة على الفلاشات والمتصفحات مع تحكم كامل من موبايلك.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/hero_dashboard.jpg">
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Tajawal', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        cyber: {
+                            bg: '#040711',
+                            card: 'rgba(11, 19, 38, 0.75)',
+                            border: 'rgba(56, 189, 248, 0.15)',
+                            emerald: '#10b981',
+                            cyan: '#06b6d4',
+                            sky: '#38bdf8',
+                            rose: '#f43f5e',
+                            amber: '#f59e0b'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #040711;
+            color: #f1f5f9;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 30%, rgba(6, 182, 212, 0.08) 0px, transparent 50%),
+                radial-gradient(at 50% 100%, rgba(244, 63, 94, 0.05) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        .glass-card {
+            background: rgba(11, 19, 38, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+        }
+
+        .glass-card-hover {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass-card-hover:hover {
+            transform: translateY(-4px);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 25px 50px -12px rgba(6, 182, 212, 0.2);
+        }
+
+        .glow-text {
+            text-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
+        }
+        .glow-emerald {
+            text-shadow: 0 0 25px rgba(16, 185, 129, 0.5);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #040711;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #38bdf8;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-cyan-500 selection:text-white">
+
+    <!-- Top Urgency Promo Banner -->
+    <div class="bg-gradient-to-r from-rose-900/90 via-rose-700/80 to-amber-600/90 text-white text-xs sm:text-sm py-2.5 px-4 text-center font-bold tracking-wide relative overflow-hidden z-50 shadow-md">
+        <div class="max-w-7xl mx-auto flex items-center justify-center gap-2 sm:gap-4 flex-wrap">
+            <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/20 text-white text-xs uppercase animate-pulse">
+                🔥 عرض الإطلاق الرسمي
+            </span>
+            <span>خصم <span class="text-amber-200 font-extrabold text-base underline">50% على خطط الاشتراكات لمدة يومين فقط (48 ساعة)</span> + <span class="text-emerald-300">شهرين مجاناً</span> عند الاشتراك السنوي!</span>
+            <a href="#pricing" class="inline-flex items-center gap-1 bg-white text-rose-900 hover:bg-slate-100 px-3 py-1 rounded-full text-xs font-black transition transform hover:scale-105 shadow">
+                <span>احجز الخصم الآن</span>
+                <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+            
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-cyan-600 via-teal-500 to-emerald-400 p-0.5 shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-500/40 transition">
+                    <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
+                        <i data-lucide="shield-check" class="w-6 h-6 text-cyan-400"></i>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xl font-black tracking-wider text-white">FileGuard <span class="text-cyan-400 text-sm font-bold">DLP</span></span>
+                        <span class="px-2 py-0.5 rounded-md bg-cyan-500/10 border border-cyan-500/30 text-[10px] font-bold text-cyan-300">Enterprise</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 font-medium">Your Digital Secret Guard</p>
+                </div>
+            </a>
+
+            <!-- Nav Links (Desktop) -->
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-semibold text-slate-300">
+                <a href="#features" class="hover:text-cyan-400 transition">محاور الحماية</a>
+                <a href="#how-it-works" class="hover:text-cyan-400 transition">كيف يعمل؟</a>
+                <a href="#pricing" class="hover:text-cyan-400 transition">الأسعار والخصم (50%)</a>
+                <a href="#calculator" class="hover:text-cyan-400 transition">حاسبة التكلفة</a>
+                <a href="#faq" class="hover:text-cyan-400 transition">الأسئلة الشائعة</a>
+            </nav>
+
+            <!-- Header Action CTA -->
+            <div class="flex items-center gap-3">
+                <a href="#demo-form" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition transform hover:-translate-y-0.5">
+                    <i data-lucide="gift" class="w-4 h-4"></i>
+                    <span>تجربة مجانية 3 أيام</span>
+                </a>
+                <a href="https://wa.me/201116234440?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D9%86%D8%B8%D8%A7%D9%85%20FileGuard%20DLP%20%D9%88%D8%B9%D8%B1%D8%B6%20%D8%AE%D8%B5%D9%85%20%D8%A7%D9%84%D9%80%2050%25" target="_blank" class="whatsapp-btn flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 transition">
+                    <i data-lucide="phone-call" class="w-4 h-4"></i>
+                    <span class="hidden md:inline font-mono">01116234440</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-12 pb-20 md:pt-20 md:pb-32 overflow-hidden">
+        <!-- Glow Orbs -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-tr from-cyan-500/15 via-emerald-500/10 to-transparent blur-3xl pointer-events-none rounded-full"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-4xl mx-auto space-y-6">
+                
+                <!-- Trust Badge -->
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border-cyan-500/30 text-cyan-300 text-xs sm:text-sm font-bold shadow-lg">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>النظام السيبراني الأول لمنع تسريب بيانات الشركات الداخلي في مصر والشرق الأوسط 🛡️</span>
+                </div>
+
+                <!-- Main Punchy Headline -->
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight">
+                    أسرار شركتك وقوائم عملائك في أمان تام.. <br>
+                    <span class="bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 bg-clip-text text-transparent glow-text">
+                        حتى من أصغر محاولة تسريب داخلية!
+                    </span>
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="text-base sm:text-xl text-slate-300 leading-relaxed font-normal max-w-3xl mx-auto">
+                    نظام <strong class="text-white font-bold">FileGuard DLP</strong> يراقب ويحظر سحب ملفات الشركة على <strong class="text-rose-400">فلاشات USB</strong>، ويجمّد رفع الملفات السرية على <strong class="text-amber-300">جوجل درايف ووي ترانسفير والواتساب</strong>، مع <strong class="text-cyan-300">إشعار وموافقة فورية من موبايلك على Telegram</strong> بضغطة زر واحدة.
+                </p>
+
+                <!-- Value Props Pillars -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 pt-4 text-xs sm:text-sm text-slate-300 font-semibold max-w-3xl mx-auto">
+                    <div class="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800">
+                        <i data-lucide="smartphone" class="w-4 h-4 text-cyan-400 shrink-0"></i>
+                        <span>موافقة فورية من الموبايل</span>
+                    </div>
+                    <div class="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800">
+                        <i data-lucide="lock" class="w-4 h-4 text-rose-400 shrink-0"></i>
+                        <span>مستحيل حذفه من الموظف</span>
+                    </div>
+                    <div class="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800">
+                        <i data-lucide="feather" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                        <span>خفيف جداً (أقل من 20MB)</span>
+                    </div>
+                    <div class="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800">
+                        <i data-lucide="server" class="w-4 h-4 text-amber-400 shrink-0"></i>
+                        <span>سيرفر محلي 100% On-Premise</span>
+                    </div>
+                </div>
+
+                <!-- CTA Actions -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
+                    <a href="#demo-form" class="w-full sm:w-auto px-8 py-4 rounded-2xl font-black text-base bg-gradient-to-r from-cyan-500 via-teal-400 to-emerald-400 hover:from-cyan-400 hover:to-emerald-300 text-slate-950 shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/50 transition transform hover:-translate-y-1 flex items-center justify-center gap-3">
+                        <i data-lucide="sparkles" class="w-5 h-5"></i>
+                        <span>احجز تجربة مجانية كاملة (3 أيام مجاناً) 🎁</span>
+                    </a>
+                    <a href="#pricing" class="w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-base glass-card hover:bg-slate-800/80 text-white border border-slate-700 hover:border-cyan-500 transition flex items-center justify-center gap-2">
+                        <span>عرض الأسعار وخصم الـ 50%</span>
+                        <i data-lucide="arrow-down" class="w-4 h-4 text-cyan-400"></i>
+                    </a>
+                </div>
+
+                <p class="text-xs text-slate-400 font-medium pt-2">
+                    ⚡ تجربة حية بدون أي التزام مالي • تركيب فوري في دقائق • خصم 50% على خطط الاشتراكات سارٍ لمدة يومين فقط (48 ساعة)
+                </p>
+            </div>
+
+            <!-- Hero Showcase Graphic / Mockup -->
+            <div class="mt-14 relative max-w-5xl mx-auto">
+                <div class="relative rounded-2xl p-2 sm:p-3 glass-card border border-cyan-500/30 shadow-2xl shadow-cyan-950/80">
+                    <img src="assets/hero_dashboard.jpg" alt="لوحة تحكم FileGuard DLP" class="rounded-xl w-full object-cover shadow-inner border border-slate-800">
+                    
+                    <!-- Floating Overlay: Telegram Approval Badge -->
+                    <div class="absolute -bottom-6 -right-2 sm:-bottom-8 sm:right-6 glass-card p-4 rounded-2xl border border-cyan-500/40 shadow-2xl max-w-xs animate-float hidden sm:block">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0">
+                                <i data-lucide="send" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <span class="text-[11px] font-bold text-cyan-300">بوت تيليجرام الإداري 📱</span>
+                                <p class="text-xs text-white font-bold">محاولة رفع: عقود_العملاء.xlsx</p>
+                                <div class="flex items-center gap-2 mt-1.5">
+                                    <span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-300 font-bold">✅ سماح</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] bg-rose-500/20 text-rose-300 font-bold">❌ حظر</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Overlay: USB Blocked Badge -->
+                    <div class="absolute -top-6 -left-2 sm:-top-8 sm:left-6 glass-card p-4 rounded-2xl border border-rose-500/40 shadow-2xl max-w-xs hidden sm:block">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center shrink-0">
+                                <i data-lucide="usb" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <span class="text-[11px] font-bold text-rose-400">USB Policy Blocked 🚫</span>
+                                <p class="text-xs text-white font-bold">تم اعتراض وتصفير ملف الحسابات</p>
+                                <span class="text-[10px] text-slate-400">حماية فورية Zero-Latency</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PAIN POINTS / THE THREAT -->
+    <section class="py-20 bg-slate-950/90 border-y border-slate-900 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20">
+                    ⚠️ هل أسرار شركتك في خطر حقيقي؟
+                </span>
+                <h2 class="text-2xl sm:text-4xl font-black text-white">
+                    4 طرق شائعة لتسريب بياناتك.. تحدث يومياً في الشركات دون علم الإدارة!
+                </h2>
+                <p class="text-sm sm:text-base text-slate-400">
+                    أغلب أصحاب الشركات لا يكتشفون سرقة البيانات وقوائم العملاء إلا بعد فوات الأوان، حين يفتح الموظف السابق نشاطاً منافساً بنفس العملاء!
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="glass-card glass-card-hover rounded-2xl p-6 border-rose-500/20 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center text-rose-400">
+                        <i data-lucide="usb" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">1. فلاشات USB والهاردات الخارجية</h3>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                        موظف يضع فلاشة وينسخ شيتات الحسابات، قواعد بيانات SQL، أو ملفات العملاء في ثوانٍ ويغادر مقر الشركة دون أي أثر!
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card glass-card-hover rounded-2xl p-6 border-amber-500/20 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400">
+                        <i data-lucide="cloud-upload" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">2. الرفع السحابي وجوجل درايف</h3>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                        رفع المستندات والعقود السرية على Google Drive الشخصي، أو مواقع WeTransfer و Mega، أو إرسالها لإيميل Gmail الشخصي.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card glass-card-hover rounded-2xl p-6 border-cyan-500/20 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                        <i data-lucide="message-square" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">3. برامج الشات والواتساب</h3>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                        فتح WhatsApp Web أو Telegram Desktop وإرفاق ملفات التسعير والعقود وتصميمات الشركة لإرسالها لأطراف خارجية.
+                    </p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="glass-card glass-card-hover rounded-2xl p-6 border-purple-500/20 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400">
+                        <i data-lucide="trash-2" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">4. مسح وتخريب ملفات الشير</h3>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                        موظف مستقيل أو غير راضٍ يمسح فولدرات الشير والسيرفر المركزي، أو حذف غير مقصود يتسبب في فقدان شهور من العمل.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CORE MODULES / THE SOLUTION -->
+    <section id="features" class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-20">
+                <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                    🛡️ منظومة الدفاع الخماسية المتكاملة
+                </span>
+                <h2 class="text-2xl sm:text-4xl font-black text-white">
+                    كيف يغلق FileGuard DLP كل أبواب التسريب أمام الموظفين؟
+                </h2>
+                <p class="text-sm sm:text-base text-slate-400">
+                    5 أسلحة أمنية فائقة الذكاء تعمل في صمت وبشكل استباقي لحماية كل بايت داخل شركتك
+                </p>
+            </div>
+
+            <!-- Feature 1 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
+                <div class="space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-cyan-500/10 text-cyan-400 text-xs font-bold border border-cyan-500/20">
+                        <i data-lucide="globe" class="w-4 h-4"></i>
+                        <span>1. درع المتصفحات وموافقة الموبايل الفورية (Web DLP)</span>
+                    </div>
+                    <h3 class="text-2xl sm:text-3xl font-black text-white leading-tight">
+                        أي محاولة لرفع ملف على المتصفح.. تتجمد في أجزاء من الثانية بانتظار قرارك!
+                    </h3>
+                    <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+                        بمجرد محاولة أي موظف رفع أي ملف على WhatsApp Web, Gmail, WeTransfer, Google Drive, Mega، أو حتى ChatGPT:
+                    </p>
+                    <ul class="space-y-3 text-xs sm:text-sm text-slate-300">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+                            <span><strong>تجميد لحظي:</strong> يتم اعتراض الرفع برمجياً قبل خروج أي بايت من الجهاز.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+                            <span><strong>إشعار فوري على Telegram:</strong> يوصلك على هاتفك اسم الموظف، اسم الملف، حجمه، والمسار.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+                            <span><strong>أزرار موافقة أو حظر:</strong> اضغط <strong>[سماح]</strong> لو الملف مصرح به، أو <strong>[حظر]</strong> لإلغائه فوراً وتسجيل المحاولة في اللوج.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="glass-card rounded-2xl p-3 border-cyan-500/20 shadow-xl">
+                    <img src="assets/05_alerts.jpg" alt="إشعارات الحظر وتيليجرام" class="rounded-xl w-full object-cover">
+                </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24 lg:flex-row-reverse">
+                <div class="glass-card rounded-2xl p-3 border-rose-500/20 shadow-xl lg:order-2">
+                    <img src="assets/06_usb.jpg" alt="حماية فلاشات USB" class="rounded-xl w-full object-cover">
+                </div>
+                <div class="space-y-6 lg:order-1">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-rose-500/10 text-rose-400 text-xs font-bold border border-rose-500/20">
+                        <i data-lucide="usb" class="w-4 h-4"></i>
+                        <span>2. حظر وتصفير الملفات على فلاشات الـ USB (USB Storage DLP)</span>
+                    </div>
+                    <h3 class="text-2xl sm:text-3xl font-black text-white leading-tight">
+                        وداعاً لسرقة البيانات عبر الفلاشات وكروت الذاكرة والهاردات الخارجية!
+                    </h3>
+                    <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+                        محرك فائق السرعة بزمن استجابة أقل من جزء من الثانية (Zero-Latency):
+                    </p>
+                    <ul class="space-y-3 text-xs sm:text-sm text-slate-300">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+                            <span><strong>حظر الامتدادات الحساسة:</strong> منع نسخ ملفات الإكسيل، الوورد، الـ PDF، قواعد البيانات SQL، الأوتوكاد، والملفات المضغوطة.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+                            <span><strong>قوائم فلاشات معتمدة (Whitelist):</strong> تحديد فلاشات الإدارة المصرح لها فقط، وحظر أي فلاشة أخرى.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+                            <span><strong>تسجيل كامل:</strong> تسجيل سريال الفلاشة، حجم الملف الحقيقي، واسم الموظف والتوقيت بالدقيقة.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
+                <div class="space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20">
+                        <i data-lucide="folder-lock" class="w-4 h-4"></i>
+                        <span>3. درع مجلدات الشير والخزنة الظلية (File Shield & Shadow Vault)</span>
+                    </div>
+                    <h3 class="text-2xl sm:text-3xl font-black text-white leading-tight">
+                        مستحيل مسح أو تخريب ملفات الشركة المشتركة وسطح المكتب!
+                    </h3>
+                    <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+                        حماية قصوى لمجلدات السيرفر والشبكة (Shared Folders) وأجهزة الموظفين:
+                    </p>
+                    <ul class="space-y-3 text-xs sm:text-sm text-slate-300">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+                            <span><strong>استرجاع فوري من الخزنة:</strong> لو موظف مسح ملف مهم بالعمد أو بالخطأ، الخزنة بتسترجعه فوراً في مكانه خلال ثانية واحدة!</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+                            <span><strong>حماية ضد فيروسات الفدية (Anti-Ransomware):</strong> منع تعديل الملفات التخريبي المفاجئ.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+                            <span><strong>إشعار فوري:</strong> ظهور تنبيه فوري في ويندوز وعلى السيرفر بإحباط محاولة الحذف.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="glass-card rounded-2xl p-3 border-emerald-500/20 shadow-xl">
+                    <img src="assets/03_fileshield.jpg" alt="درع حماية مجلدات الشير" class="rounded-xl w-full object-cover">
+                </div>
+            </div>
+
+            <!-- Feature 4 & 5 Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 4 -->
+                <div class="glass-card rounded-2xl p-8 border-teal-500/20 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-teal-500/15 border border-teal-500/30 flex items-center justify-center text-teal-400">
+                        <i data-lucide="message-circle" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">4. تأمين برامج المحادثة (WhatsApp & Telegram Desktop)</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        الموظف يقدر يتواصل ويدردش شات كتابي عادي لشغله، لكن السيستم بيمنع إرفاق وإرسال المستندات السرية والعقود عبر واتساب وتليجرام ديسك توب تماماً!
+                    </p>
+                </div>
+
+                <!-- 5 -->
+                <div class="glass-card rounded-2xl p-8 border-cyan-500/20 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                        <i data-lucide="radar" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">5. رادار الأجهزة والتحكم المركزي (SOC Radar HUD)</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        خريطة رادار حية تكشف حالة كل جهاز في الشركة (أونلاين/أوفلاين)، مع تحديد سياسات مخصصة لكل جهاز أو موظف، وإمكانية حذف واستبدال الأجهزة بضغطة زر.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- STORYBOARD / THE FULL JOURNEY -->
+    <section id="how-it-works" class="py-20 bg-slate-950/70 border-y border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                    🎬 القصة في 9 مشاهد سينمائية
+                </span>
+                <h2 class="text-2xl sm:text-4xl font-black text-white">
+                    رحلة حماية بيانات شركتك من الألف إلى الياء
+                </h2>
+                <p class="text-sm sm:text-base text-slate-400">
+                    من أول محاولة تسريب سرية وحتى السيطرة التامة وغرفة العمليات في جيبك
+                </p>
+            </div>
+
+            <div class="glass-card rounded-3xl p-4 sm:p-6 border-slate-800 shadow-2xl">
+                <img src="assets/storyboard.jpg" alt="ستوري بورد FileGuard DLP" class="rounded-2xl w-full object-cover border border-slate-800">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 text-xs sm:text-sm text-slate-300">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-rose-400"></span>
+                        <span>1- محاولة رفع سرية أو توصيل فلاشة</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                        <span>2- حظر لحظي + إشعار تيليجرام للمدير</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        <span>3- موافقة من الموبايل + رادار وسجلات SOC</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING SECTION WITH 50% DISCOUNT -->
+    <section id="pricing" class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs sm:text-sm font-bold animate-pulse">
+                    🔥 عرض خاص: خصم 50% على الاشتراكات سارٍ لمدة يومين فقط (48 ساعة ⏱️)
+                </div>
+                <h2 class="text-3xl sm:text-5xl font-black text-white">
+                    باقات أسعار مرنة واقتصادية تناسب كل الشركات
+                </h2>
+                <p class="text-sm sm:text-base text-slate-300">
+                    استثمار بسيط يحمي مجهود سنين ويحفظ ملايين الجنيهات من الضياع والتسريب الداخلي
+                </p>
+
+                <!-- Billing Toggle -->
+                <div class="pt-6 flex items-center justify-center gap-4">
+                    <span id="label-monthly" class="text-sm font-bold text-cyan-400">اشتراك شهري مرن</span>
+                    <button id="billing-toggle" onclick="toggleBilling()" class="w-14 h-8 bg-slate-800 rounded-full p-1 border border-slate-700 relative transition">
+                        <div id="toggle-thumb" class="w-6 h-6 bg-cyan-400 rounded-full transition transform"></div>
+                    </button>
+                    <span id="label-annual" class="text-sm font-medium text-slate-400 flex items-center gap-1.5">
+                        <span>اشتراك سنوي</span>
+                        <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold border border-emerald-500/30">شهرين مجاناً 🎁</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Pricing Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+                
+                <!-- Plan 1 -->
+                <div class="glass-card rounded-3xl p-8 border-slate-800 flex flex-col justify-between space-y-8 glass-card-hover">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xl font-bold text-white">الشركات الناشئة والمكاتب</h3>
+                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-800 text-slate-300">2 - 5 أجهزة</span>
+                        </div>
+                        <p class="text-xs text-slate-400">مناسبة للمكاتب القانونية، عيادات، ومكاتب المحاسبة الصغيرة.</p>
+                        
+                        <div class="pt-4 border-t border-slate-800 space-y-1">
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-xs text-slate-500 line-through font-mono" id="old-price-1">70 ج.م</span>
+                                <span class="text-4xl font-black text-white font-mono" id="price-1">35</span>
+                                <span class="text-sm font-bold text-slate-400" id="period-1">ج.م / جهاز / شهرياً</span>
+                            </div>
+                            <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                                تم تطبيق خصم 50% 🏷️
+                            </span>
+                        </div>
+
+                        <ul class="space-y-3 pt-6 border-t border-slate-800 text-xs sm:text-sm text-slate-300">
+                            <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i><span>حماية كاملة للويب والمتصفحات (Web DLP)</span></li>
+                            <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i><span>حظر نسخ الملفات على فلاشات USB</span></li>
+                            <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i><span>بوت Telegram الإداري للموافقة من الموبايل</span></li>
+                            <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i><span>سيرفر محلي مشفر 100% On-Premise</span></li>
+                            <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i><span>صيانة ودعم فني وتحديثات مجاناً 100%</span></li>
+                        </ul>
+                    </div>
+
+                    <a href="#demo-form" onclick="selectPlan('2-5 أجهزة')" class="w-full py-3.5 rounded-xl font-bold text-sm bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 hover:border-cyan-400 transition text-center block">
+                        طلب تجربة مجانية للباقة
+                    </a>
+                </div>
+
+                <!-- Plan 2 -->
+                <div class="glass-card rounded-3xl p-8 border-slate-800 flex flex-col justify-between space-y-8 glass-card-hover">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xl font-bold text-white">الشركات المتوسطة</h3>
+                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-800 text-slate-300">6 - 9 أجهزة</span>
+                        </div>
+                        <p class="text-xs text-slate-400">للشركات التجارية، وكالات التسويق، والشركات الهندسية.</p>
+                        
+                        <div class="pt-4 border-t border-slate-800 space-y-1">
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-xs text-slate-500 line-through font-mono" id="old-price-2">60 ج.م</span>
+                                <span class="text-4xl font-black text-white font-mono" id="price-2">30</span>
+                                <span class="text-sm font-bold text-slate-400" id="period-2">ج.م / جهاز / شهرياً</span>
+                            </div>
+                            <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                                تم تطبيق خصم 50% 🏷️
+                            </span>
+                        </div>
+
+                        <ul class="space-y-3 pt-6 border-t border-slate-800 text-xs sm:text-sm text-slate-300">
+                            <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i><span>جميع مميزات باقة الشركات الصغيرة</span></li>
+                            <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i><span>درع حماية فولدرات الشير والسيرفر (File Shield)</span></li>
+                            <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i><span>الخزنة الظلية الفورية (Shadow Vault)</span></li>
+                            <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i><span>تأمين WhatsApp & Telegram Desktop</span></li>
+                            <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i><span>دعم فني وصيانة مجانية طوال الاشتراك</span></li>
+                        </ul>
+                    </div>
+
+                    <a href="#demo-form" onclick="selectPlan('6-9 أجهزة')" class="w-full py-3.5 rounded-xl font-bold text-sm bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 hover:border-cyan-400 transition text-center block">
+                        طلب تجربة مجانية للباقة
+                    </a>
+                </div>
+
+                <!-- Plan 3 (Featured) -->
+                <div class="glass-card rounded-3xl p-8 border-cyan-500/50 relative flex flex-col justify-between space-y-8 shadow-2xl shadow-cyan-950/60 transform md:-translate-y-2">
+                    <div class="absolute -top-3.5 right-1/2 translate-x-1/2 px-4 py-1 rounded-full text-xs font-black bg-gradient-to-r from-cyan-400 to-emerald-400 text-slate-950 shadow-md">
+                        ⭐ الباقة الأكثر طلباً للشركات
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xl font-bold text-white">المؤسسات والمصانع</h3>
+                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">10 أجهزة فأكثر</span>
+                        </div>
+                        <p class="text-xs text-slate-400">للمصانع، شركات الاستيراد والتصدير، والمؤسسات الكبرى.</p>
+                        
+                        <div class="pt-4 border-t border-slate-800 space-y-1">
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-xs text-slate-500 line-through font-mono" id="old-price-3">50 ج.م</span>
+                                <span class="text-4xl font-black text-cyan-300 font-mono" id="price-3">25</span>
+                                <span class="text-sm font-bold text-slate-400" id="period-3">ج.م / جهاز / شهرياً</span>
+                            </div>
+                            <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                                توفير هائل + خصم 50% 🏷️
+                            </span>
+                        </div>
+
+                        <ul class="space-y-3 pt-6 border-t border-slate-800 text-xs sm:text-sm text-slate-200">
+                            <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-cyan-400"></i><span class="font-bold">حماية كاملة غير محدودة لجميع الأقسام</span></li>
+                            <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-cyan-400"></i><span>ربط مباشر وتكامل صامت مع Active Directory</span></li>
+                            <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-cyan-400"></i><span>سياسات Group Policy (GPO) مشفرة ومقفولة تماماً</span></li>
+                            <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-cyan-400"></i><span>رادار أجهزة حي وسجلات تدقيق كاملة CSV / Excel</span></li>
+                            <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-cyan-400"></i><span>دعم فني مخصص VIP على مدار الساعة 24/7</span></li>
+                        </ul>
+                    </div>
+
+                    <a href="#demo-form" onclick="selectPlan('10 أجهزة فأكثر')" class="w-full py-4 rounded-xl font-black text-sm bg-gradient-to-r from-cyan-400 to-emerald-400 hover:from-cyan-300 hover:to-emerald-300 text-slate-950 shadow-lg shadow-cyan-500/30 transition text-center block">
+                        احجز نسختك الآن بخصم الـ 50%
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Setup Fee Explanation Banner -->
+            <div class="mt-12 glass-card rounded-2xl p-6 border-slate-800 max-w-4xl mx-auto space-y-3">
+                <div class="flex items-center justify-between flex-wrap gap-2">
+                    <h4 class="text-sm font-bold text-cyan-300 flex items-center gap-2">
+                        <i data-lucide="wrench" class="w-4 h-4"></i>
+                        <span>رسوم التثبيت والتجهيز والربط الكامل (تدفع مرة واحدة فقط - غير خاضعة للخصم):</span>
+                    </h4>
+                    <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700">تدفع لمرة واحدة فقط</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-slate-300 pt-2 border-t border-slate-800">
+                    <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                        <span class="block text-slate-400">2 إلى 10 أجهزة:</span>
+                        <strong class="text-white text-base font-mono">2,500 ج.م</strong>
+                        <span class="block text-[10px] text-slate-500 mt-0.5">شاملة التجهيز والربط</span>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                        <span class="block text-slate-400">11 إلى 20 جهاز:</span>
+                        <strong class="text-white text-base font-mono">3,500 ج.م</strong>
+                        <span class="block text-[10px] text-slate-500 mt-0.5">شاملة التجهيز والربط</span>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                        <span class="block text-slate-400">أكثر من 20 جهاز:</span>
+                        <strong class="text-white text-base font-mono">4,500 ج.م</strong>
+                        <span class="block text-[10px] text-slate-500 mt-0.5">شاملة التجهيز والربط</span>
+                    </div>
+                </div>
+                <p class="text-[11px] text-slate-400 pt-1">
+                    * تشمل التركيب في مقر شركتكم (داخل القاهرة والجيزة) أو عن بعد (لجميع المحافظات والدول العربية) + تجهيز Active Directory + برمجة وتدريب الإدارة على لوحة التحكم بالكامل + صيانة ودعم فني مجاناً 100% طوال فترة الاشتراك.<br>
+                    <span class="text-amber-300 font-bold">💡 ملاحظة: عرض خصم الـ 50% يطبق حصرياً على خطط الاشتراكات الشهرية والسنوية لمدة يومين فقط.</span>
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- INTERACTIVE COST & SAVINGS CALCULATOR -->
+    <section id="calculator" class="py-20 bg-slate-950/80 border-y border-slate-900">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card rounded-3xl p-8 sm:p-12 border-cyan-500/20 space-y-8">
+                <div class="text-center space-y-2">
+                    <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest">🧮 حاسبة التكلفة والتوفير الفورية</span>
+                    <h3 class="text-2xl sm:text-3xl font-black text-white">كم سيكلفك تأمين شركتك مع خصم 50%؟</h3>
+                    <p class="text-xs sm:text-sm text-slate-400">حرك المؤشر لاختيار عدد الأجهزة في شركتك وشاهد التكلفة والتوفير فوراً:</p>
+                </div>
+
+                <!-- Direct Number Input + Slider Controls -->
+                <div class="space-y-4 max-w-xl mx-auto">
+                    <div class="flex items-center justify-between flex-wrap gap-3 font-bold text-sm bg-slate-900/60 p-4 rounded-2xl border border-slate-800">
+                        <label for="device-input" class="text-slate-300 flex items-center gap-2 cursor-pointer">
+                            <i data-lucide="monitor" class="w-4 h-4 text-cyan-400"></i>
+                            <span>اكتب عدد الأجهزة مباشرة أو حرك المؤشر:</span>
+                        </label>
+                        <div class="flex items-center gap-2">
+                            <input type="number" id="device-input" min="2" max="10000" value="10" oninput="onDeviceInput(this.value)" class="w-28 bg-slate-950 border border-cyan-500/50 rounded-xl px-3 py-1.5 text-xl font-black text-cyan-300 font-mono text-center focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 transition shadow-inner">
+                            <span class="text-xs text-slate-400 font-bold">جهاز</span>
+                        </div>
+                    </div>
+
+                    <input type="range" id="device-slider" min="2" max="1000" value="10" step="1" oninput="updateCalculator(this.value)" class="w-full h-2.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400">
+                    <div class="flex justify-between text-[11px] text-slate-500 font-mono">
+                        <span>جهازين</span>
+                        <span>50 جهاز</span>
+                        <span>250 جهاز</span>
+                        <span>500 جهاز</span>
+                        <span>1,000 جهاز</span>
+                    </div>
+
+                    <!-- Quick Preset Buttons -->
+                    <div class="flex flex-wrap gap-2 pt-2 items-center justify-center">
+                        <span class="text-[11px] text-slate-400 font-semibold">اختيار سريع:</span>
+                        <button type="button" onclick="setDevicePreset(5)" class="px-3 py-1 rounded-lg text-xs font-bold bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 hover:border-cyan-500 transition">5 أجهزة</button>
+                        <button type="button" onclick="setDevicePreset(10)" class="px-3 py-1 rounded-lg text-xs font-bold bg-cyan-950/40 text-cyan-300 border border-cyan-500/40 hover:border-cyan-400 transition">10 أجهزة ⭐</button>
+                        <button type="button" onclick="setDevicePreset(25)" class="px-3 py-1 rounded-lg text-xs font-bold bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 hover:border-cyan-500 transition">25 جهاز</button>
+                        <button type="button" onclick="setDevicePreset(50)" class="px-3 py-1 rounded-lg text-xs font-bold bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 hover:border-cyan-500 transition">50 جهاز</button>
+                        <button type="button" onclick="setDevicePreset(100)" class="px-3 py-1 rounded-lg text-xs font-bold bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 hover:border-cyan-500 transition">100 جهاز</button>
+                        <button type="button" onclick="setDevicePreset(250)" class="px-3 py-1 rounded-lg text-xs font-bold bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 hover:border-cyan-500 transition">250 جهاز</button>
+                        <button type="button" onclick="setDevicePreset(500)" class="px-3 py-1 rounded-lg text-xs font-bold bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 hover:border-cyan-500 transition">500 جهاز</button>
+                    </div>
+                </div>
+
+                <!-- Calculation Result Box -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-800">
+                    <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 text-center space-y-1">
+                        <span class="text-xs text-slate-400 font-medium">الاشتراك الشهري المخفض:</span>
+                        <div class="text-2xl font-black text-white font-mono" id="calc-monthly-cost">250 ج.م</div>
+                        <span class="text-[10px] text-slate-500 line-through" id="calc-old-monthly">500 ج.م</span>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-cyan-950/20 border border-cyan-500/30 text-center space-y-1">
+                        <span class="text-xs text-cyan-300 font-bold">الاشتراك السنوي (شامل شهرين مجاناً):</span>
+                        <div class="text-2xl font-black text-cyan-300 font-mono" id="calc-annual-cost">2,500 ج.م</div>
+                        <span class="text-[10px] text-emerald-400 font-bold">12 شهر كاملة</span>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-emerald-950/20 border border-emerald-500/30 text-center space-y-1">
+                        <span class="text-xs text-emerald-400 font-bold">إجمالي ما توفره مع العرض:</span>
+                        <div class="text-2xl font-black text-emerald-400 font-mono" id="calc-savings">3,500 ج.م</div>
+                        <span class="text-[10px] text-slate-300 font-bold">توفير حقيقي 50%+</span>
+                    </div>
+                </div>
+
+                <div class="text-center pt-2">
+                    <a href="#demo-form" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-black text-sm bg-cyan-400 hover:bg-cyan-300 text-slate-950 shadow-lg shadow-cyan-500/20 transition">
+                        <span>احجز هذا السعر لشركتك الآن</span>
+                        <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LEAD CAPTURE & WHATSAPP BOOKING FORM -->
+    <section id="demo-form" class="py-24 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card rounded-3xl p-8 sm:p-12 border-cyan-500/30 shadow-2xl space-y-8 relative">
+                
+                <div class="text-center space-y-3">
+                    <span class="px-3.5 py-1.5 rounded-full text-xs font-black bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                        🎁 عرض الديمو المجاني (Free Demo)
+                    </span>
+                    <h2 class="text-2xl sm:text-4xl font-black text-white">
+                        احجز نسختك التجريبية مجاناً لمدة 3 أيام
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto">
+                        سجل بياناتك وسيتم التواصل معك لتركيب نسخة تجريبية حية على أجهزة شركتك بدون دفع أي مبالغ، لتتأكد بنفسك من حماية النظام قبل التعاقد!
+                    </p>
+                </div>
+
+                <form id="booking-form" onsubmit="handleFormSubmit(event)" class="space-y-5 max-w-xl mx-auto">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-300 mb-1.5">اسم المسؤول / صاحب الشركة:</label>
+                        <input type="text" id="cust-name" required placeholder="مثال: أ. محمد سامي" class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-300 mb-1.5">اسم الشركة أو النشاط التجاري:</label>
+                        <input type="text" id="cust-company" required placeholder="مثال: شركة النور للاستيراد / مكتب المحاماة" class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 mb-1.5">رقم الموبايل / الواتساب:</label>
+                            <input type="tel" id="cust-phone" required placeholder="01xxxxxxxxx" class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition font-mono" dir="ltr">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 mb-1.5">عدد الأجهزة المطلوب حمايتها في شركتك:</label>
+                            <div class="relative">
+                                <input type="number" id="cust-devices" required min="2" max="10000" value="10" placeholder="اكتب عدد الأجهزة (مثال: 10 أو 85)" class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition font-mono pr-4 pl-16">
+                                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 pointer-events-none">جهاز</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-300 mb-1.5">المحافظة / المدينة:</label>
+                        <input type="text" id="cust-city" placeholder="مثال: القاهرة / الجيزة / الإسكندرية / خارج مصر" class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition">
+                    </div>
+
+                    <div class="pt-4">
+                        <button type="submit" class="w-full py-4 rounded-xl font-black text-base bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 shadow-xl shadow-emerald-500/25 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                            <i data-lucide="send" class="w-5 h-5"></i>
+                            <span>تأكيد الحجز وبدء التجربة المجانية عبر واتساب 💬</span>
+                        </button>
+                    </div>
+
+                    <p class="text-[11px] text-center text-slate-400">
+                        🔒 نضمن لك سرية وخصوصية بياناتك 100% • لن يتم مشاركة رقمك مع أي طرف ثالث.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="py-20 bg-slate-950/90 border-t border-slate-900">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center space-y-4 mb-16">
+                <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700">
+                    ❓ الأسئلة الشائعة
+                </span>
+                <h2 class="text-2xl sm:text-4xl font-black text-white">
+                    كل ما يهمك معرفته قبل بدء تشغيل النظام
+                </h2>
+            </div>
+
+            <div class="space-y-4">
+                
+                <!-- Q1 -->
+                <div class="glass-card rounded-2xl p-6 border-slate-800">
+                    <h3 class="text-base font-bold text-white flex items-center gap-2 mb-2">
+                        <i data-lucide="help-circle" class="w-5 h-5 text-cyan-400 shrink-0"></i>
+                        <span>هل الموظف يقدر يقفل البرنامج أو يمسح الإضافة في المتصفح؟</span>
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed pr-7">
+                        <strong>مستحيل نهائياً؛</strong> الإضافة مقفولة برمجياً وتظهر عليها علامة "Managed by your organization"، وزر الحذف والإيقاف معطل تماماً. وحتى لو الموظف يمتلك صلاحيات Administrator كاملة، خدمة المراقبة (Watchdog) تعيد تشغيل النظام فوراً ومحمية ضد الإغلاق.
+                    </p>
+                </div>
+
+                <!-- Q2 -->
+                <div class="glass-card rounded-2xl p-6 border-slate-800">
+                    <h3 class="text-base font-bold text-white flex items-center gap-2 mb-2">
+                        <i data-lucide="help-circle" class="w-5 h-5 text-cyan-400 shrink-0"></i>
+                        <span>هل البرنامج يسبب بطء في أجهزة الموظفين أو يقلل سرعتها؟</span>
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed pr-7">
+                        <strong>لا إطلاقاً؛</strong> تم بناء وكتابة البرنامج بأعلى معايير الكفاءة (C# / C++ Native Engine)، ويستهلك أقل من 20 ميجابايت من الذاكرة (RAM) مع استهلاك معالج يكاد يقترب من 0%. الموظف لن يشعر بوجوده إطلاقاً في استخدامه اليومي.
+                    </p>
+                </div>
+
+                <!-- Q3 -->
+                <div class="glass-card rounded-2xl p-6 border-slate-800">
+                    <h3 class="text-base font-bold text-white flex items-center gap-2 mb-2">
+                        <i data-lucide="help-circle" class="w-5 h-5 text-cyan-400 shrink-0"></i>
+                        <span>هل النظام يحتاج إلى Active Directory وسيرفر دومين؟ وماذا لو لم يكن لدينا دومين؟</span>
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed pr-7">
+                        النظام متوافق بالكامل مع <strong>Active Directory</strong> للتثبيت المركزي السريع عبر GPO للشركات التي تمتلك دومين؛ <strong class="text-emerald-400">ولو مفيش Active Directory في شركتكم، بنعمله ونجهزه لحضرتك بالكامل مع الكونفجريشن من الصفر مفيش أي مشكلة يا فندم!</strong> أو يمكن تشغيل النظام ليعمل بكل كفاءة محلياً على الأجهزة (شبكة Workgroup عادية) بدون أي عائق.
+                    </p>
+                </div>
+
+                <!-- Q4 -->
+                <div class="glass-card rounded-2xl p-6 border-slate-800">
+                    <h3 class="text-base font-bold text-white flex items-center gap-2 mb-2">
+                        <i data-lucide="help-circle" class="w-5 h-5 text-cyan-400 shrink-0"></i>
+                        <span>هل تخرج أي ملفات أو بيانات خارج مقر الشركة؟</span>
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed pr-7">
+                        <strong>نهائياً؛</strong> النظام يعمل محلياً 100% On-Premise داخل شبكة شركتكم، ولا يتم رفع أو إرسال أي ملفات إلى أي سحابة أو خوادم خارجية حفاظاً على السرية المطلقة.
+                    </p>
+                </div>
+
+                <!-- Q5 -->
+                <div class="glass-card rounded-2xl p-6 border-slate-800">
+                    <h3 class="text-base font-bold text-white flex items-center gap-2 mb-2">
+                        <i data-lucide="help-circle" class="w-5 h-5 text-cyan-400 shrink-0"></i>
+                        <span>كيف يتم التركيب والتهيئة لأجهزتنا؟</span>
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed pr-7">
+                        إذا كانت شركتكم داخل <strong>القاهرة أو الجيزة</strong>، يتوفر خيار الزيارة الميدانية المباشرة لفريقنا التقني في مقركم أو التركيب عن بعد؛ وإذا كنتم في أي محافظة أخرى أو خارج مصر، يتم التركيب والتهيئة بالكامل عن بُعد عبر برامج التحكم الآمن (AnyDesk / TeamViewer) في أقل من 20 دقيقة باحترافية تامة.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 border-t border-slate-900 py-12 text-slate-400 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold">
+                    <i data-lucide="shield" class="w-4 h-4"></i>
+                </div>
+                <div>
+                    <span class="font-bold text-white text-sm">FileGuard DLP Enterprise</span>
+                    <p class="text-[11px] text-slate-500">نظام حماية ومنع تسريب بيانات الشركات الداخلي © 2026. جميع الحقوق محفوظة.</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-6 text-slate-400 text-xs">
+                <a href="#features" class="hover:text-white transition">المميزات</a>
+                <a href="#pricing" class="hover:text-white transition">الأسعار والخصم</a>
+                <a href="#faq" class="hover:text-white transition">الأسئلة الشائعة</a>
+                <a href="#demo-form" class="hover:text-cyan-400 font-bold transition">طلب تجربة مجانية</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a id="floating-whatsapp" href="https://wa.me/201116234440?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D8%AE%D8%B5%D9%85%20%D8%A7%D9%84%D9%80%2050%25%20%D9%84%D9%86%D8%B8%D8%A7%D9%85%20FileGuard%20DLP%20%D9%88%D8%AA%D8%AC%D8%B1%D8%A8%D8%A9%20%D8%A7%D9%84%D8%AF%D9%8A%D9%85%D9%88%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A." target="_blank" class="fixed bottom-6 left-6 z-50 flex items-center gap-2.5 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-white font-black px-4 py-3.5 rounded-full shadow-2xl shadow-emerald-500/40 transition transform hover:scale-110 group" title="تواصل واتساب فوراً">
+        <i data-lucide="message-circle" class="w-6 h-6"></i>
+        <span class="text-xs sm:text-sm font-bold hidden sm:inline">تواصل واتساب فوراً: 01116234440</span>
+        <span class="w-3 h-3 rounded-full bg-white animate-ping absolute -top-1 -right-1"></span>
+    </a>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Target WhatsApp Number
+        const WHATSAPP_NUMBER = "201116234440"; // رقم الإدارة والواتساب المباشر
+
+        // Set WhatsApp links dynamically
+        function updateWhatsAppLinks() {
+            const btns = document.querySelectorAll('.whatsapp-btn, #floating-whatsapp');
+            btns.forEach(btn => {
+                const currentHref = btn.getAttribute('href');
+                if (currentHref && currentHref.includes('wa.me/')) {
+                    btn.setAttribute('href', currentHref.replace(/wa\.me\/\d+/, `wa.me/${WHATSAPP_NUMBER}`));
+                }
+            });
+        }
+        updateWhatsAppLinks();
+
+        // Billing Toggle State (Monthly vs Annual with 2 Months Free)
+        let isAnnual = false;
+        function toggleBilling() {
+            isAnnual = !isAnnual;
+            const thumb = document.getElementById('toggle-thumb');
+            const lblMonthly = document.getElementById('label-monthly');
+            const lblAnnual = document.getElementById('label-annual');
+
+            if (isAnnual) {
+                thumb.classList.add('-translate-x-6');
+                lblAnnual.classList.add('text-cyan-400', 'font-bold');
+                lblAnnual.classList.remove('text-slate-400', 'font-medium');
+                lblMonthly.classList.remove('text-cyan-400', 'font-bold');
+                lblMonthly.classList.add('text-slate-400', 'font-medium');
+
+                // Annual Prices (10 months cost = 12 months coverage)
+                // 35 * 10 = 350 LE / year / device
+                document.getElementById('old-price-1').textContent = "700 ج.م";
+                document.getElementById('price-1').textContent = "350";
+                document.getElementById('period-1').textContent = "ج.م / جهاز / سنوياً";
+
+                // 30 * 10 = 300 LE / year / device
+                document.getElementById('old-price-2').textContent = "600 ج.م";
+                document.getElementById('price-2').textContent = "300";
+                document.getElementById('period-2').textContent = "ج.م / جهاز / سنوياً";
+
+                // 25 * 10 = 250 LE / year / device
+                document.getElementById('old-price-3').textContent = "500 ج.م";
+                document.getElementById('price-3').textContent = "250";
+                document.getElementById('period-3').textContent = "ج.م / جهاز / سنوياً";
+            } else {
+                thumb.classList.remove('-translate-x-6');
+                lblMonthly.classList.add('text-cyan-400', 'font-bold');
+                lblMonthly.classList.remove('text-slate-400', 'font-medium');
+                lblAnnual.classList.remove('text-cyan-400', 'font-bold');
+                lblAnnual.classList.add('text-slate-400', 'font-medium');
+
+                // Monthly Prices (50% off)
+                document.getElementById('old-price-1').textContent = "70 ج.م";
+                document.getElementById('price-1').textContent = "35";
+                document.getElementById('period-1').textContent = "ج.م / جهاز / شهرياً";
+
+                document.getElementById('old-price-2').textContent = "60 ج.م";
+                document.getElementById('price-2').textContent = "30";
+                document.getElementById('period-2').textContent = "ج.م / جهاز / شهرياً";
+
+                document.getElementById('old-price-3').textContent = "50 ج.م";
+                document.getElementById('price-3').textContent = "25";
+                document.getElementById('period-3').textContent = "ج.م / جهاز / شهرياً";
+            }
+        }
+
+        // Interactive Calculator (Supports typing & slider)
+        function updateCalculator(devices, fromInput = false) {
+            let num = parseInt(devices);
+            if (isNaN(num) || num < 2) num = 2;
+            if (num > 10000) num = 10000;
+
+            const slider = document.getElementById('device-slider');
+            const input = document.getElementById('device-input');
+            const formDevices = document.getElementById('cust-devices');
+
+            if (!fromInput && input) {
+                input.value = num;
+            }
+            if (fromInput && slider) {
+                slider.value = Math.min(num, 1000);
+            }
+            if (formDevices) {
+                formDevices.value = num;
+            }
+
+            let ratePerDevice = 25; // 10+
+            let oldRate = 50;
+            if (num <= 5) {
+                ratePerDevice = 35;
+                oldRate = 70;
+            } else if (num <= 9) {
+                ratePerDevice = 30;
+                oldRate = 60;
+            }
+
+            const monthlyCost = num * ratePerDevice;
+            const oldMonthly = num * oldRate;
+            const annualCost = monthlyCost * 10; // 2 months free
+            const oldAnnual = oldMonthly * 12;
+            const totalSavings = oldAnnual - annualCost;
+
+            document.getElementById('calc-monthly-cost').textContent = `${monthlyCost.toLocaleString()} ج.م`;
+            document.getElementById('calc-old-monthly').textContent = `${oldMonthly.toLocaleString()} ج.م`;
+            document.getElementById('calc-annual-cost').textContent = `${annualCost.toLocaleString()} ج.م`;
+            document.getElementById('calc-savings').textContent = `${totalSavings.toLocaleString()} ج.م`;
+        }
+
+        // When user types directly into input
+        function onDeviceInput(val) {
+            updateCalculator(val, true);
+        }
+
+        // Quick Preset Buttons
+        function setDevicePreset(val) {
+            const input = document.getElementById('device-input');
+            if (input) input.value = val;
+            updateCalculator(val, false);
+        }
+
+        // Quick Plan Select
+        function selectPlan(planTier) {
+            let count = 10;
+            if (planTier.includes('2-5')) count = 5;
+            else if (planTier.includes('6-9')) count = 8;
+            else count = 20;
+
+            setDevicePreset(count);
+            const formSection = document.getElementById('demo-form');
+            if (formSection) formSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Form Submit to WhatsApp
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('cust-name').value.trim();
+            const company = document.getElementById('cust-company').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+            const devices = document.getElementById('cust-devices').value;
+            const city = document.getElementById('cust-city').value.trim() || "غير محدد";
+
+            const msg = `🚨 طلب تجربة ديمو وحجز خصم 50% لـ FileGuard DLP:%0A%0A` +
+                        `👤 الاسم: ${name}%0A` +
+                        `🏢 الشركة: ${company}%0A` +
+                        `📱 الهاتف: ${phone}%0A` +
+                        `💻 عدد الأجهزة: ${devices}%0A` +
+                        `📍 المدينة: ${city}%0A` +
+                        `🏷️ العرض: خصم 50% الإطلاق الرسمي + تجربة 3 أيام مجاناً%0A%0A` +
+                        `أرجو التواصل لتحديد موعد التركيب وبدء التجربة المجانية.`;
+
+            const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
+            window.open(waUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
