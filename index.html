@@ -555,8 +555,8 @@
                         
                         <div class="pt-4 border-t border-slate-800 space-y-1">
                             <div class="flex items-baseline gap-2">
-                                <span class="text-xs text-slate-500 line-through font-mono" id="old-price-1">70 ج.م</span>
-                                <span class="text-4xl font-black text-white font-mono" id="price-1">35</span>
+                                <span class="text-xs text-slate-500 line-through font-mono" id="old-price-1">140 ج.م</span>
+                                <span class="text-4xl font-black text-white font-mono" id="price-1">70</span>
                                 <span class="text-sm font-bold text-slate-400" id="period-1">ج.م / جهاز / شهرياً</span>
                             </div>
                             <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">
@@ -589,8 +589,8 @@
                         
                         <div class="pt-4 border-t border-slate-800 space-y-1">
                             <div class="flex items-baseline gap-2">
-                                <span class="text-xs text-slate-500 line-through font-mono" id="old-price-2">60 ج.م</span>
-                                <span class="text-4xl font-black text-white font-mono" id="price-2">30</span>
+                                <span class="text-xs text-slate-500 line-through font-mono" id="old-price-2">120 ج.م</span>
+                                <span class="text-4xl font-black text-white font-mono" id="price-2">60</span>
                                 <span class="text-sm font-bold text-slate-400" id="period-2">ج.م / جهاز / شهرياً</span>
                             </div>
                             <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">
@@ -627,8 +627,8 @@
                         
                         <div class="pt-4 border-t border-slate-800 space-y-1">
                             <div class="flex items-baseline gap-2">
-                                <span class="text-xs text-slate-500 line-through font-mono" id="old-price-3">50 ج.م</span>
-                                <span class="text-4xl font-black text-cyan-300 font-mono" id="price-3">25</span>
+                                <span class="text-xs text-slate-500 line-through font-mono" id="old-price-3">100 ج.م</span>
+                                <span class="text-4xl font-black text-cyan-300 font-mono" id="price-3">50</span>
                                 <span class="text-sm font-bold text-slate-400" id="period-3">ج.م / جهاز / شهرياً</span>
                             </div>
                             <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">
@@ -961,19 +961,19 @@
                 lblMonthly.classList.add('text-slate-400', 'font-medium');
 
                 // Annual Prices (10 months cost = 12 months coverage)
-                // 35 * 10 = 350 LE / year / device
-                document.getElementById('old-price-1').textContent = "700 ج.م";
-                document.getElementById('price-1').textContent = "350";
+                // 70 * 10 = 700 LE / year / device
+                document.getElementById('old-price-1').textContent = "1,400 ج.م";
+                document.getElementById('price-1').textContent = "700";
                 document.getElementById('period-1').textContent = "ج.م / جهاز / سنوياً";
 
-                // 30 * 10 = 300 LE / year / device
-                document.getElementById('old-price-2').textContent = "600 ج.م";
-                document.getElementById('price-2').textContent = "300";
+                // 60 * 10 = 600 LE / year / device
+                document.getElementById('old-price-2').textContent = "1,200 ج.م";
+                document.getElementById('price-2').textContent = "600";
                 document.getElementById('period-2').textContent = "ج.م / جهاز / سنوياً";
 
-                // 25 * 10 = 250 LE / year / device
-                document.getElementById('old-price-3').textContent = "500 ج.م";
-                document.getElementById('price-3').textContent = "250";
+                // 50 * 10 = 500 LE / year / device
+                document.getElementById('old-price-3').textContent = "1,000 ج.م";
+                document.getElementById('price-3').textContent = "500";
                 document.getElementById('period-3').textContent = "ج.م / جهاز / سنوياً";
             } else {
                 thumb.classList.remove('-translate-x-6');
@@ -983,16 +983,16 @@
                 lblAnnual.classList.add('text-slate-400', 'font-medium');
 
                 // Monthly Prices (50% off)
-                document.getElementById('old-price-1').textContent = "70 ج.م";
-                document.getElementById('price-1').textContent = "35";
+                document.getElementById('old-price-1').textContent = "140 ج.م";
+                document.getElementById('price-1').textContent = "70";
                 document.getElementById('period-1').textContent = "ج.م / جهاز / شهرياً";
 
-                document.getElementById('old-price-2').textContent = "60 ج.م";
-                document.getElementById('price-2').textContent = "30";
+                document.getElementById('old-price-2').textContent = "120 ج.م";
+                document.getElementById('price-2').textContent = "60";
                 document.getElementById('period-2').textContent = "ج.م / جهاز / شهرياً";
 
-                document.getElementById('old-price-3').textContent = "50 ج.م";
-                document.getElementById('price-3').textContent = "25";
+                document.getElementById('old-price-3').textContent = "100 ج.م";
+                document.getElementById('price-3').textContent = "50";
                 document.getElementById('period-3').textContent = "ج.م / جهاز / شهرياً";
             }
         }
@@ -1017,14 +1017,14 @@
                 formDevices.value = num;
             }
 
-            let ratePerDevice = 25; // 10+
-            let oldRate = 50;
+            let ratePerDevice = 50; // 10+
+            let oldRate = 100;
             if (num <= 5) {
-                ratePerDevice = 35;
-                oldRate = 70;
+                ratePerDevice = 70;
+                oldRate = 140;
             } else if (num <= 9) {
-                ratePerDevice = 30;
-                oldRate = 60;
+                ratePerDevice = 60;
+                oldRate = 120;
             }
 
             const monthlyCost = num * ratePerDevice;
