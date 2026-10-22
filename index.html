@@ -781,7 +781,7 @@
                 <form id="booking-form" onsubmit="handleFormSubmit(event)" class="space-y-5 max-w-xl mx-auto">
                     <div>
                         <label class="block text-xs font-bold text-slate-300 mb-1.5">اسم المسؤول / صاحب الشركة:</label>
-                        <input type="text" id="cust-name" required placeholder="مثال: أ. محمد سامي" class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition">
+                        <input type="text" id="cust-name" required placeholder="مثال: م. أحمد محمود" class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition">
                     </div>
 
                     <div>
@@ -809,9 +809,9 @@
                     </div>
 
                     <div class="pt-4">
-                        <button type="submit" class="w-full py-4 rounded-xl font-black text-base bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 shadow-xl shadow-emerald-500/25 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
-                            <i data-lucide="send" class="w-5 h-5"></i>
-                            <span>تأكيد الحجز وبدء التجربة المجانية عبر واتساب 💬</span>
+                        <button type="submit" id="submit-btn" class="w-full py-4 rounded-xl font-black text-base bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 shadow-xl shadow-emerald-500/25 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                            <i data-lucide="send" class="w-5 h-5" id="btn-icon"></i>
+                            <span id="btn-text">تأكيد الحجز وبدء التجربة المجانية (3 أيام مجاناً) 🚀</span>
                         </button>
                     </div>
 
@@ -819,6 +819,29 @@
                         🔒 نضمن لك سرية وخصوصية بياناتك 100% • لن يتم مشاركة رقمك مع أي طرف ثالث.
                     </p>
                 </form>
+
+                <!-- Booking Success Message (Replaces form upon submission) -->
+                <div id="booking-success" class="hidden text-center py-10 px-4 space-y-6 max-w-xl mx-auto glass-card rounded-3xl border-emerald-500/40 shadow-2xl shadow-emerald-950/50">
+                    <div class="w-20 h-20 rounded-full bg-emerald-500/20 border-2 border-emerald-400 text-emerald-400 flex items-center justify-center text-4xl mx-auto shadow-xl shadow-emerald-500/30">
+                        ✓
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="text-2xl sm:text-3xl font-black text-white">تم استلام طلبك وتأكيد الحجز بنجاح! 🎉</h3>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md mx-auto">
+                            شكراً لك أستاذ <strong class="text-cyan-400" id="success-cust-name"></strong>.<br>
+                            تم تسجيل بيانات شركتكم (<span class="text-white font-bold" id="success-cust-company"></span>) بنجاح وحجز خصم الـ 50%.<br>
+                            سيتواصل معك مهندس الدعم الفني هاتفياً خلال أقل من 15 دقيقة لتفعيل النسخة التجريبية (3 أيام مجاناً).
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-800 space-y-3">
+                        <p class="text-xs text-slate-400">إذا كنت ترغب في بدء المحادثة فوراً دون انتظار اتصالنا:</p>
+                        <a id="success-wa-link" href="#" target="_blank" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-xs sm:text-sm bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-white transition shadow-lg shadow-emerald-500/30">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i>
+                            <span>تحدث معنا مباشرة عبر واتساب (اختياري)</span>
+                        </a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -1063,8 +1086,8 @@
             if (formSection) formSection.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Form Submit to WhatsApp
-        function handleFormSubmit(e) {
+        // Automated Lead Capture (Delivers data automatically without customer sending WhatsApp)
+        async function handleFormSubmit(e) {
             e.preventDefault();
             const name = document.getElementById('cust-name').value.trim();
             const company = document.getElementById('cust-company').value.trim();
@@ -1072,17 +1095,77 @@
             const devices = document.getElementById('cust-devices').value;
             const city = document.getElementById('cust-city').value.trim() || "غير محدد";
 
-            const msg = `🚨 طلب تجربة ديمو وحجز خصم 50% لـ FileGuard DLP:%0A%0A` +
+            const btn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
+            if (btn) btn.disabled = true;
+            if (btnText) btnText.textContent = "جاري تأكيد حجزك وتسجيل البيانات... ⏳";
+
+            // Clean phone for direct wa.me link
+            let cleanPhone = phone.replace(/[^0-9]/g, '');
+            if (cleanPhone.startsWith('0')) cleanPhone = '2' + cleanPhone;
+
+            const leadData = {
+                "الاسم": name,
+                "الشركة": company,
+                "رقم_الموبايل": phone,
+                "عدد_الأجهزة": devices,
+                "المحافظة": city,
+                "العرض": "خصم 50% + ديمو تجريبي 3 أيام مجاناً",
+                "رابط_واتساب_العميل": `https://wa.me/${cleanPhone}`,
+                "_subject": `🚨 عميل جديد لـ FileGuard DLP: ${name} (${company} - ${devices} جهاز)`,
+                "_template": "table"
+            };
+
+            // 1. Send automatically via FormSubmit (Direct email delivery to Mohamed Samy)
+            try {
+                fetch("https://formsubmit.co/ajax/mohamedsamy99981@gmail.com", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify(leadData)
+                }).catch(() => {});
+            } catch (err) {}
+
+            // 2. Also send Telegram notification if reachable
+            try {
+                const tgToken = "8964796189:AAGEPWzXnOphQggckt0hiR16O6cQXAXghjU";
+                const tgChatId = "6320692020";
+                const tgText = `🚨 طلب حجز ديمو جديد (خصم 50%):\n\n` +
+                               `👤 الاسم: ${name}\n` +
+                               `🏢 الشركة: ${company}\n` +
+                               `📱 الهاتف: ${phone}\n` +
+                               `💻 عدد الأجهزة: ${devices}\n` +
+                               `📍 المدينة: ${city}\n` +
+                               `👉 رابط محادثة العميل: https://wa.me/${cleanPhone}`;
+                fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ chat_id: tgChatId, text: tgText })
+                }).catch(() => {});
+            } catch (err) {}
+
+            // Prepare optional WhatsApp link if customer chooses to chat
+            const msg = `🚨 مرحباً، قمت بتسجيل طلب تجربة ديمو وحجز خصم 50% عبر الموقع:%0A%0A` +
                         `👤 الاسم: ${name}%0A` +
                         `🏢 الشركة: ${company}%0A` +
                         `📱 الهاتف: ${phone}%0A` +
                         `💻 عدد الأجهزة: ${devices}%0A` +
-                        `📍 المدينة: ${city}%0A` +
-                        `🏷️ العرض: خصم 50% الإطلاق الرسمي + تجربة 3 أيام مجاناً%0A%0A` +
+                        `📍 المدينة: ${city}%0A%0A` +
                         `أرجو التواصل لتحديد موعد التركيب وبدء التجربة المجانية.`;
-
             const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
-            window.open(waUrl, '_blank');
+            const successWaLink = document.getElementById('success-wa-link');
+            if (successWaLink) successWaLink.href = waUrl;
+
+            // Show Success State on page
+            document.getElementById('booking-form').classList.add('hidden');
+            document.getElementById('success-cust-name').textContent = name;
+            document.getElementById('success-cust-company').textContent = company;
+            document.getElementById('booking-success').classList.remove('hidden');
+
+            if (window.lucide) window.lucide.createIcons();
+            document.getElementById('booking-success').scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 </body>
